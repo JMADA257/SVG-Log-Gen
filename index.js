@@ -36,5 +36,3 @@ function init() {
 
 init();
 
-//do the three characters validation at the end depending on time
-//finish classes and tests/
