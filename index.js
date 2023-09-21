@@ -1,4 +1,5 @@
 const inquirer = require("inquirer");
+const shapes = require("./lib/shapes");
 const fs = require("fs");
 const questions = [
   {
@@ -13,7 +14,7 @@ const questions = [
   },
   {
     type: "list",
-    name: "license",
+    name: "shape",
     message: "Please choose which image youd like.",
     choices: ["Triangle", "Circle", "Square"],
   },
@@ -24,3 +25,16 @@ const questions = [
       "Please enter a color keyword or a hexadecimal number for the shape.",
   },
 ];
+
+function init() {
+  inquirer.prompt(questions).then((data) => {
+    const svgLogo = new shapes[data.shape](data.letter, data.color, data.shapeColor);
+    fs.writeFileSync("./output/logo.svg", svgLogo.render());
+    console.log("Generated logo.svg");
+  });
+}
+
+init();
+
+//do the three characters validation at the end depending on time
+//finish classes and tests/
